@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+includeBuild("build-logic")
 
 pluginManagement {
     repositories {
@@ -24,10 +25,22 @@ dependencyResolutionManagement {
 
 rootProject.name = "Shmr25"
 include(":app")
-include(":core")
-include(":model")
-include(":network")
-include(":feature1")
-include(":feature2")
-include(":feature3")
+
+listOf(
+    "model",
+    "core",
+    "network",
+).forEach {
+    include(":$it")
+    project(":$it").projectDir = file("core/$it")
+}
+
+listOf(
+    "feature1",
+    "feature2",
+    "feature3",
+).forEach {
+    include(":$it")
+    project(":$it").projectDir = file("features/$it")
+}
 

@@ -24,7 +24,7 @@ import ru.yandex.shmr.feature2.Feature2Screen
 import ru.yandex.shmr.feature3.FEATURE_3_NAV_TAG
 import ru.yandex.shmr.feature3.Feature3Screen
 import ru.yandex.shmr.network.networkRepository
-import ru.yandex.shmr.ui.theme.Shmr25Theme
+import ru.yandex.shmr.app.ui.theme.Shmr25Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

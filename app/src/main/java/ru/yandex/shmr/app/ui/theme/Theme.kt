@@ -1,4 +1,4 @@
-package ru.yandex.shmr.ui.theme
+package ru.yandex.shmr.app.ui.theme
 
 import android.app.Activity
 import android.os.Build
