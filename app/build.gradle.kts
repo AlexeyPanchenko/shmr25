@@ -1,9 +1,14 @@
+import com.asarkar.gradle.buildtimetracker.BarPosition
+import com.asarkar.gradle.buildtimetracker.Output
+import com.asarkar.gradle.buildtimetracker.Sort
 import groovy.json.JsonSlurper
 import java.net.URL
+import java.time.Duration
 
 plugins {
     id("android-app-module")
     alias(libs.plugins.graph)
+    alias(libs.plugins.time.tracker)
 }
 
 android {
@@ -28,6 +33,14 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+buildTimeTracker {
+    barPosition = BarPosition.TRAILING
+    sortBy = Sort.ASC
+    output = Output.CSV
+    minTaskDuration = Duration.ofSeconds(1)
+    reportsDir.set(File(layout.buildDirectory.get().asFile, "reports/buildTimeTracker"))
 }
 
 tasks.register("getYourDog") {
