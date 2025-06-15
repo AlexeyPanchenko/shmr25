@@ -18,8 +18,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ru.yandex.shmr.feature1.Feature1Const
-import ru.yandex.shmr.feature2.Feature2Const
 
 const val FEATURE_3_NAV_TAG = "feature3"
 
@@ -51,8 +49,8 @@ fun Feature3Screen(navController: NavController) {
                     Button(
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                         onClick = {
-                            navController.currentBackStackEntry!!.savedStateHandle.set(Feature1Const.FROM, "feature3")
-                            navController.navigate(Feature1Const.FEATURE_1_NAV_TAG)
+                            navController.currentBackStackEntry!!.savedStateHandle.set("from", "feature3")
+                            navController.navigate("feature1")
                         }
                     ) {
                         Text("open feature1")
@@ -60,8 +58,8 @@ fun Feature3Screen(navController: NavController) {
                     Button(
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Green),
                         onClick = {
-                            navController.currentBackStackEntry!!.savedStateHandle.set(Feature2Const.FROM, "feature3")
-                            navController.navigate(Feature2Const.FEATURE_2_NAV_TAG)
+                            navController.currentBackStackEntry!!.savedStateHandle.set("from", "feature3")
+                            navController.navigate("feature2")
                         }
                     ) {
                         Text("open feature2")
