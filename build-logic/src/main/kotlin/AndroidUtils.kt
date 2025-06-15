@@ -1,3 +1,5 @@
+@file:Suppress("MatchingDeclarationName")
+
 import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.JavaVersion

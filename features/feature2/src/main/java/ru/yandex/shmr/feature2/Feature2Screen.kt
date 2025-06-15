@@ -24,11 +24,6 @@ import kotlinx.coroutines.runBlocking
 import ru.yandex.shmr.model.DogInfo
 import ru.yandex.shmr.network.NetworkRepository
 
-object Feature2Const {
-    const val FEATURE_2_NAV_TAG = "feature2"
-    const val FROM = "from"
-}
-
 val text = mutableStateOf("")
 
 @Composable
