@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn ru.yandex.shmr.feature1.Feature1ScreenKt
+-dontwarn ru.yandex.shmr.feature2.Feature2ScreenKt
+-dontwarn ru.yandex.shmr.feature3.Feature3ScreenKt
+-dontwarn ru.yandex.shmr.network.NetworkRepository
+-dontwarn ru.yandex.shmr.network.NetworkRepositoryKt

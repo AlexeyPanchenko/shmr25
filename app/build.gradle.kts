@@ -9,6 +9,7 @@ plugins {
     id("android-app-module")
     alias(libs.plugins.graph)
     alias(libs.plugins.time.tracker)
+    id("com.spotify.ruler")
 }
 
 android {
@@ -41,6 +42,13 @@ buildTimeTracker {
     output = Output.CSV
     minTaskDuration = Duration.ofSeconds(1)
     reportsDir.set(File(layout.buildDirectory.get().asFile, "reports/buildTimeTracker"))
+}
+
+ruler {
+    abi.set("arm64-v8a")
+    locale.set("en")
+    screenDensity.set(480)
+    sdkVersion.set(27)
 }
 
 tasks.register("getYourDog") {

@@ -8,3 +8,9 @@ plugins {
     alias(libs.plugins.graph) apply false
     alias(libs.plugins.time.tracker) apply false
 }
+
+buildscript {
+    dependencies {
+        classpath(libs.ruler.plugin)
+    }
+}
