@@ -1,3 +1,6 @@
+import groovy.json.JsonSlurper
+import java.net.URL
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -42,4 +45,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+tasks.create("getYourDog") {
+    val input = URL("https://dog.ceo/api/breeds/image/random").openConnection().apply {
+        doInput = true
+        connect()
+    }.inputStream
+    val json = JsonSlurper().parse(input) as Map<String, String>
+    println("Your dog is ${json["message"]}")
 }
