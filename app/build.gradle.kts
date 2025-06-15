@@ -45,8 +45,6 @@ android {
 
 dependencies {
 
-    implementation(project(":model"))
-    implementation(project(":network"))
     implementation(project(":feature1"))
     implementation(project(":feature2"))
     implementation(project(":feature3"))

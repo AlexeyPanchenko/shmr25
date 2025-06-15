@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    implementation(project(":model"))
+    api(project(":model"))
 
     api(libs.retrofit)
     api(libs.retrofit.converter.gson)
