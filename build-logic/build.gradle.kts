@@ -11,7 +11,7 @@ repositories {
 gradlePlugin {
     plugins.register("checkConventionsPlugin") {
         id = "check-conventions-plugin"
-        implementationClass = "plugins.convntions.CheckConventionsPlugin"
+        implementationClass = "plugins.conventions.CheckConventionsPlugin"
     }
 }
 
