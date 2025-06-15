@@ -16,6 +16,8 @@ jetbrainsKotlinJvm = "2.0.21"
 retrofit = "2.11.0"
 gson = "2.11.0"
 
+graph-plugin = "2.8.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -46,4 +48,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+graph = { id = "com.jraska.module.graph.assertion", version.ref = "graph-plugin" }
 
