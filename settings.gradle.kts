@@ -31,8 +31,7 @@ listOf(
     "core",
     "network",
 ).forEach {
-    include(":$it")
-    project(":$it").projectDir = file("core/$it")
+    include(":core:$it")
 }
 
 listOf(
@@ -40,7 +39,6 @@ listOf(
     "feature2",
     "feature3",
 ).forEach {
-    include(":$it")
-    project(":$it").projectDir = file("features/$it")
+    include(":features:$it")
 }
 

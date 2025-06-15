@@ -1,13 +1,10 @@
-import groovy.json.JsonSlurper
-import java.net.URL
-
 plugins {
     id("android-core-module")
 }
 
 dependencies {
 
-    api(project(":model"))
+    api(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

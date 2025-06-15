@@ -8,6 +8,14 @@ repositories {
     gradlePluginPortal()
 }
 
+gradlePlugin {
+    plugins.register("checkConventionsPlugin") {
+        id = "check-conventions-plugin"
+        implementationClass = "plugins.convntions.CheckConventionsPlugin"
+    }
+}
+
+
 dependencies {
     implementation(libs.agp)
     implementation(libs.kotlin.gradle.plugin)

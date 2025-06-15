@@ -8,3 +8,5 @@
 
 - file:///Users/punchman/MyProjects/shmr-25/reports/size/release/report.html
 - file:///Users/punchman/MyProjects/shmr-25/reports/size/debug/report.html
+
+- ./gradlew assertModuleGraph

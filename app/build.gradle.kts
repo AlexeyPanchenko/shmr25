@@ -7,6 +7,7 @@ import java.time.Duration
 
 plugins {
     id("android-app-module")
+    id("check-conventions-plugin")
     alias(libs.plugins.graph)
     alias(libs.plugins.time.tracker)
     id("com.spotify.ruler")
@@ -23,9 +24,9 @@ android {
 
 dependencies {
 
-    implementation(project(":feature1"))
-    implementation(project(":feature2"))
-    implementation(project(":feature3"))
+    implementation(project(":features:feature1"))
+    implementation(project(":features:feature2"))
+    implementation(project(":features:feature3"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -34,6 +35,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+moduleGraphAssert {
+    maxHeight = 3
+    allowed = arrayOf(":features:.* -> :core:.*", ":app -> :.*", ":core:.* -> :core:model")
+//    restricted = arrayOf(":features:.* -X> :features:.*")
 }
 
 buildTimeTracker {

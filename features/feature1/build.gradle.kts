@@ -4,6 +4,6 @@ plugins {
 
 dependencies {
 
-    api(project(":core"))
-    api(project(":network"))
+    api(project(":core:core"))
+    api(project(":core:network"))
 }

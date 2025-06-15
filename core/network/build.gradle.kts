@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
 
-    api(project(":model"))
+    api(project(":core:model"))
 
     api(libs.retrofit)
     api(libs.retrofit.converter.gson)
