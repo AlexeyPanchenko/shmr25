@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: ./gradlew :app:assembleDebug $gradleFlags
       - name: Fix time csv
-        run: sed '1s/^/task,time,percent,bar\n/' app/build/reports/buildTimeTracker/build.scv  > buildTime.csv
+        run: sed '1s/^/task,time,percent,bar\n/' app/build/reports/buildTimeTracker/build.csv  > buildTime.csv
       - name: Generate Markdown report
         run: chmod +x ./csv2md.sh && ./csv2md.sh buildTime.csv > $GITHUB_STEP_SUMMARY
       - name: Upload apk
@@ -44,7 +44,7 @@ jobs:
       - name: Run Detekt
         run: ./gradlew detekt $gradleFlags
       - name: Generate Markdown report
-        run: cat build/reports/detekt/detekt.html > $GITHUB_STEP_SUMMARY
+        run: cat build/reports/detekt/detekt.md > $GITHUB_STEP_SUMMARY
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
