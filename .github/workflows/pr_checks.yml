@@ -15,19 +15,70 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: gradle
-      - name: Grant execute permission for gradlew
-        shell: bash
-        run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: Setup environment
+        uses: ./.github/actions/init-gradle
+      - name: Build
         run: ./gradlew :app:assembleDebug $gradleFlags
       - name: Upload apk
         uses: actions/upload-artifact@v4
         with:
           name: app.apk
           path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload time report
+        uses: actions/upload-artifact@v4
+        with:
+          name: build.scv
+          path: app/build/reports/buildTimeTracker/build.scv
+
+  run-detekt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup environment
+        uses: ./.github/actions/init-gradle
+      - name: Run Detekt
+        run: ./gradlew :app:detekt $gradleFlags
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: detekt.html
+          path: build/reports/detekt/detekt.html
+
+  check-app-size:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup environment
+        uses: ./.github/actions/init-gradle
+      - name: Analyze size
+        run: ./gradlew :app:analyzeDebugBundle $gradleFlags
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: detekt.html
+          path: app/build/reports/ruler/debug/report.html
+
+  check-module-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup environment
+        uses: ./.github/actions/init-gradle
+      - name: Check Graph
+        run: ./gradlew :app:assertModuleGraph $gradleFlags
+      - name: Generate graph
+        run: ./gradlew :app:generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules $gradleFlags
+      - name: Install graphviz
+        run: sudo apt-get -y install graphviz
+      - name: Draw graph
+        run: dot -Tpng all_modules -o all_modules.png
+        if: success()
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: all_modules.png
+          path: all_modules.png

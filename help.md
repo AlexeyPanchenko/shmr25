@@ -12,3 +12,5 @@
 - ./gradlew assertModuleGraph
 
 - ./gradlew detekt
+
+- ./gradlew :app:analyzeDebugBundle
