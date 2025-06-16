@@ -2,7 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="core.Shmr25.core" target="21" />
+      <module name="core.Shmr25.network" target="21" />
+      <module name="features.Shmr25.feature1" target="21" />
+      <module name="features.Shmr25.feature2" target="21" />
+      <module name="features.Shmr25.feature3" target="21" />
+      <module name="Shmr25.feature1" target="21" />
       <module name="Shmr25.feature1-sample" target="21" />
+      <module name="Shmr25.feature2" target="21" />
+      <module name="Shmr25.feature3" target="21" />
+      <module name="Shmr25.network" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

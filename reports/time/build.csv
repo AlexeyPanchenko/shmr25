@@ -1,0 +1,22 @@
+  :feature3:compileReleaseKotlin,1S,10%,█
+        :app:mergeDebugResources,1S,10%,█
+     :core:mergeReleaseResources,1S,10%,█
+ :feature1:mergeReleaseResources,1S,10%,█
+ :feature3:mergeReleaseResources,1S,10%,█
+ :feature2:mergeReleaseResources,1S,10%,█
+      :app:processDebugResources,1S,10%,█
+    :app:processReleaseResources,1S,10%,█
+:feature1:verifyReleaseResources,1S,10%,█
+    :core:verifyReleaseResources,1S,10%,█
+:feature2:verifyReleaseResources,1S,10%,█
+:feature3:verifyReleaseResources,1S,10%,█
+      :feature2:lintAnalyzeDebug,1S,10%,█
+            :app:mergeDexRelease,1S,10%,█
+      :feature3:lintAnalyzeDebug,2S,20%,██
+      :feature1:lintAnalyzeDebug,2S,20%,██
+           :app:mergeExtDexDebug,3S,30%,███
+         :app:mergeExtDexRelease,3S,30%,███
+   :app:lintAnalyzeDebugUnitTest,4S,40%,████
+    :app:lintVitalAnalyzeRelease,4S,40%,████
+:app:lintAnalyzeDebugAndroidTest,4S,40%,████
+           :app:lintAnalyzeDebug,4S,40%,████

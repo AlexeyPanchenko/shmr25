@@ -1,64 +1,33 @@
+import com.asarkar.gradle.buildtimetracker.BarPosition
+import com.asarkar.gradle.buildtimetracker.Output
+import com.asarkar.gradle.buildtimetracker.Sort
+import groovy.json.JsonSlurper
+import java.net.URL
+import java.time.Duration
+
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("android-app-module")
+    id("check-conventions-plugin")
+    alias(libs.plugins.graph)
+    alias(libs.plugins.time.tracker)
+    id("com.spotify.ruler")
 }
 
 android {
-    namespace = "ru.yandex.shmr"
-    compileSdk = 35
-
     defaultConfig {
-        applicationId = "ru.yandex.shmr"
-        minSdk = 24
-        targetSdk = 35
+        applicationId = Const.NAMESPACE
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        targetSdk = Const.COMPILE_SKD
     }
 }
 
 dependencies {
 
-    implementation(project(":model"))
-    implementation(project(":network"))
-    implementation(project(":feature1"))
-    implementation(project(":feature2"))
-    implementation(project(":feature3"))
+    implementation(project(":features:feature1"))
+    implementation(project(":features:feature2"))
+    implementation(project(":features:feature3"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +35,36 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+moduleGraphAssert {
+    maxHeight = 3
+    allowed = arrayOf(":features:.* -> :core:.*", ":app -> :.*", ":core:.* -> :core:model")
+//    restricted = arrayOf(":features:.* -X> :features:.*")
+}
+
+buildTimeTracker {
+    barPosition = BarPosition.TRAILING
+    sortBy = Sort.ASC
+    output = Output.CSV
+    minTaskDuration = Duration.ofSeconds(1)
+    reportsDir.set(File(layout.buildDirectory.get().asFile, "reports/buildTimeTracker"))
+}
+
+ruler {
+    abi.set("arm64-v8a")
+    locale.set("en")
+    screenDensity.set(480)
+    sdkVersion.set(27)
+}
+
+tasks.register("getYourDog") {
+    doLast {
+        val input = URL("https://dog.ceo/api/breeds/image/random").openConnection().apply {
+            doInput = true
+            connect()
+        }.inputStream
+        val json = JsonSlurper().parse(input) as Map<String, String>
+        println("Your dog is ${json["message"]}")
+    }
 }

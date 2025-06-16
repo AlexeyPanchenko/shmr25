@@ -16,7 +16,17 @@ jetbrainsKotlinJvm = "2.0.21"
 retrofit = "2.11.0"
 gson = "2.11.0"
 
+graph-plugin = "2.8.0"
+time-tracker = "5.0.1"
+ruler = "2.0.0-beta-3"
+detekt = "1.23.8"
+
 [libraries]
+agp = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-plugin = { group = "org.jetbrains.kotlin.plugin.compose", name = "org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlin" }
+ruler-plugin = { group = "com.spotify.ruler", name = "ruler-gradle-plugin", version.ref = "ruler" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -46,4 +56,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+graph = { id = "com.jraska.module.graph.assertion", version.ref = "graph-plugin" }
+time-tracker = { id = "com.asarkar.gradle.build-time-tracker", version.ref = "time-tracker" }
+ruler = { id = "com.spotify.ruler", version.ref = "ruler" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 

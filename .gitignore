@@ -3,6 +3,7 @@
 .kotlin
 /local.properties
 /.idea/caches
+/.idea/inspectionProfiles
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml

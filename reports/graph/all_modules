@@ -1,0 +1,11 @@
+digraph G {
+":app" -> ":feature1" [color=red style=bold]
+":app" -> ":feature2"
+":app" -> ":feature3"
+":feature1" -> ":core" [color=red style=bold]
+":feature1" -> ":network"
+":feature2" -> ":core"
+":feature2" -> ":network"
+":core" -> ":model" [color=red style=bold]
+":network" -> ":model"
+}
