@@ -11,7 +11,7 @@ inputs:
   file:
     description: 'Path to file'
     required: true
-  message:
+  text:
     description: 'Report message'
     required: true
 
@@ -27,4 +27,4 @@ runs:
     - name: Send Message
       shell: bash
       run: |
-        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendMessage?chat_id=${{ inputs.tg-chat }}&text=${{ inputs.message }}
+        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendMessage?chat_id=${{ inputs.tg-chat }}&text=${{ inputs.text }}
