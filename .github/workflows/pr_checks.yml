@@ -90,6 +90,8 @@ jobs:
         with:
           input-file: all_modules
           output-file: all_modules.png
+      - name: Generate Markdown report
+        run: echo "![Graph](data:image/png;base64,$(cat all_modules.png | base64))" > $GITHUB_STEP_SUMMARY
       - name: Report Telegram
         uses: ./.github/actions/send-file-tg
         with:
