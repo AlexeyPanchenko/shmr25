@@ -19,10 +19,18 @@ jobs:
         uses: ./.github/actions/init-gradle
       - name: Build
         run: ./gradlew :app:assembleDebug $gradleFlags
-      - name: Fix time csv
-        run: sed '1s/^/task,time,percent,bar\n/' app/build/reports/buildTimeTracker/build.csv  > buildTime.csv
-      - name: Generate Markdown report
-        run: chmod +x ./csv2md.sh && ./csv2md.sh buildTime.csv > $GITHUB_STEP_SUMMARY
+      - name: Report Telegram
+        uses: ./.github/actions/send-file-tg
+        with:
+          tg-token: ${{ secrets.TG_TOKEN }}
+          tg-chat: ${{ secrets.TG_CHAT }}
+          file: app/build/outputs/apk/debug/app-debug.apk
+          message: "Build PR apk from branch ${{ github.head_ref }}. Link to build https://github.com/AlexeyPanchenko/shmr25_tmp/actions/runs/${{ github.run_id }}"
+      - name: Generate build time report
+        uses: ./.github/actions/build-time-report
+        with:
+          file: app/build/reports/buildTimeTracker/build.csv
+          output-file: buildTime.csv
       - name: Upload apk
         uses: actions/upload-artifact@v4
         with:
@@ -77,14 +85,13 @@ jobs:
         run: ./gradlew :app:assertModuleGraph $gradleFlags
       - name: Generate graph
         run: ./gradlew :app:generateModulesGraphvizText -Pmodules.graph.output.gv=all_modules $gradleFlags
-      - name: Install graphviz
-        run: sudo apt-get -y install graphviz
       - name: Draw graph
-        run: dot -Tpng all_modules -o all_modules.png
-        if: success()
+        uses: ./.github/actions/draw-graph
+        with:
+          input-file: all_modules
+          output-file: all_modules.png
       - name: Upload report
         uses: actions/upload-artifact@v4
-        if: success()
         with:
           name: all_modules.png
           path: all_modules.png
