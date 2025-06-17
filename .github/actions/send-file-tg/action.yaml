@@ -22,9 +22,9 @@ runs:
     - name: Send file
       shell: bash
       run: |
-        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendDocument?chat_id=${{ inputs.tg.chat }} \
+        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendDocument?chat_id=${{ inputs.tg-chat }} \
         -F 'document=@${{ inputs.file }}'
     - name: Send Message
       shell: bash
       run: |
-        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendMessage?chat_id=${{ inputs.tg.chat }}&text=${{ inputs.message }}
+        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendMessage?chat_id=${{ inputs.tg-chat }}&text=${{ inputs.message }}
