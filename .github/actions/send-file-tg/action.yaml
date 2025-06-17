@@ -15,7 +15,6 @@ inputs:
     description: 'Report message'
     required: true
 
-
 runs:
   using: 'composite'
   steps:
@@ -24,7 +23,4 @@ runs:
       run: |
         curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendDocument?chat_id=${{ inputs.tg-chat }} \
         -F 'document=@${{ inputs.file }}'
-    - name: Send Message
-      shell: bash
-      run: |
-        curl https://api.telegram.org/bot${{ inputs.tg-token }}/sendMessage?chat_id=${{ inputs.tg-chat }}&text=${{ inputs.text }}
+        -F 'caption=${{ inputs.text }}'
