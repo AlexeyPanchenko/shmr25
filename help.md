@@ -12,3 +12,8 @@
 - ./gradlew assertModuleGraph
 
 - ./gradlew detekt
+
+- ./gradlew :app:analyzeDebugBundle
+
+
+https://community.gradle.org/github-actions/docs/setup-gradle/#caching-build-state-between-jobs
