@@ -32,6 +32,7 @@ tasks.withType<Detekt>().configureEach {
     }
     parallel = true
     autoCorrect = false
+    basePath = rootProject.projectDir.absolutePath
 
     setSource(files(projectDir))
     include("**/*.kt")

@@ -17,3 +17,5 @@
 
 
 https://community.gradle.org/github-actions/docs/setup-gradle/#caching-build-state-between-jobs
+
+https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github
