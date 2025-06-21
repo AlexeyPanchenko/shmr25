@@ -30,8 +30,8 @@ jobs:
       - name: Upload apk
         uses: actions/upload-artifact@v4
         with:
-          name: app.apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: app-unsigned
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
       - name: Upload time report
         uses: actions/upload-artifact@v4
         with:
@@ -52,23 +52,22 @@ jobs:
           cache: gradle
       - uses: actions/download-artifact@v4
         with:
-          name: app.apk
-          path: app.apk
+          name: app-unsigned
       - name: Install android cli tools
         shell: bash
         run: |
           set -e
           sudo mkdir -p $ANDROID_SDK_ROOT
           cd $ANDROID_SDK_ROOT
-          curl https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip -o android-tools.zip
-          unzip android-tools.zip
-          yes | sudo ./cmdline-tools/bin/sdkmanager --licenses
-          sudo ./cmdline-tools/bin/sdkmanager "build-tools;35.0.0"
+          sudo curl https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip -o android-tools.zip
+          sudo unzip android-tools.zip
+          sudo bash -c "yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses"
+          sudo $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "build-tools;35.0.0"
       - name: Zipalign apk
         shell: bash
         run: |
           set -e
-          $ANDROID_SDK_ROOT/build-tools/35.0.0/zipalign -v -p 4 app.apk app-aligned.apk
+          $ANDROID_SDK_ROOT/build-tools/35.0.0/zipalign -v -p 4 app-release-unsigned.apk app-aligned.apk
       - name: Sign apk
         shell: bash
         run: |
@@ -83,7 +82,7 @@ jobs:
       - name: Upload apk
         uses: actions/upload-artifact@v4
         with:
-          name: app-signed.apk
+          name: app-signed
           path: app-signed.apk
 
   report-telegram:
@@ -91,11 +90,12 @@ jobs:
     needs: sign-app
     continue-on-error: true
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Download apk
         uses: actions/download-artifact@v4
         with:
-          name: app-signed.apk
-          path: app-signed.apk
+          name: app-signed
       - name: Report signed file
         uses: ./.github/actions/send-file-tg
         with:
